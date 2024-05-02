@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import '../data/Izkiscreen.dart';
+import '../data/NzwaScreen.dart';
+import '../data/Salalahscreen.dart';
+import '../data/muscatscreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -67,11 +70,40 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: ListView.builder(
                     itemCount: 4,
-                    itemBuilder: (context, index) => placecard(
-                      title: ['Muscat', 'Izki', 'Nizwa', 'Salalah'][index],
-                      image: 'images/${['b', 'c', 'd', 'e'][index]}.jpg',
-                      press: () {},
-                    ),
+                    itemBuilder: (context, index) {
+                      List<String> places = ['Muscat', 'Izki', 'Nizwa', 'Salalah'];
+                      List<String> images = ['b', 'c', 'd', 'e'];
+                      return placecard(
+                        title: places[index],
+                        image: 'images/${images[index]}.jpg',
+                        press: () {
+                          if (places[index] == "Muscat") {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => muscatscreen()),
+                            );
+                          }
+                          if (places[index] == "Izki") {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => izkiscreen()),
+                            );
+                          }
+                          if (places[index] == "Nizwa") {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Nizwascreen()),
+                            );
+                          }
+                          if (places[index] == "Salalah") {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Salalahscreen()),
+                            );
+                          }
+                        },
+                      );
+                    },
                   ),
                 ),
               ],
@@ -79,7 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-
     );
   }
 }
@@ -87,7 +118,10 @@ class _HomeScreenState extends State<HomeScreen> {
 class placecard extends StatelessWidget {
   final String title, image;
   final VoidCallback press;
+
   const placecard({super.key, required this.title, required this.image, required this.press});
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),

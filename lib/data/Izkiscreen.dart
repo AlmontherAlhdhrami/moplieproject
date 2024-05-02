@@ -1,24 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../screens/ImageDecoration.dart';
+
+import '../screens/CastleDetailScreen.dart';
+import '../screens/ImageDecoration.dart';
 import 'DatabaseHelper.dart';
 import 'court_model.dart';
-import '../../screens/CastleDetailScreen.dart'; // Ensure you have the correct import for CastleDetailScreen
 
-class MyTextScreen extends StatefulWidget {
-  const MyTextScreen({Key? key});
+class izkiscreen extends StatefulWidget {
+  const izkiscreen({super.key});
 
   @override
-  State<MyTextScreen> createState() => _MyTextScreenState();
+  State<izkiscreen> createState() => _izkiscreenState();
 }
 
-class _MyTextScreenState extends State<MyTextScreen> {
+class _izkiscreenState extends State<izkiscreen> {
   List<Court> castleList = [];
 
   @override
   void initState() {
     super.initState();
-    DatabaseHelper.readFirebaseRealtimeDBMain((List<Court> castleList) {
+    DatabaseHelper.read((List<Court> castleList) {
       setState(() {
         this.castleList = castleList;
       });
@@ -29,7 +29,7 @@ class _MyTextScreenState extends State<MyTextScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Field List'),
+        title: Text('Izki Field List'),
         backgroundColor: Colors.deepPurple,
       ),
       body: castleList.isEmpty

@@ -65,7 +65,7 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.blueGrey[700],
+                  color: Colors.blue[300],
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
@@ -81,17 +81,17 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
                     widget.court.courtData?.imagePath != null
                         ? ImageDecoration(imagePath: widget.court.courtData!.imagePath!)
                         : const SizedBox(height: 200, child: Placeholder()),
-                    Text("Name: ${widget.court.courtData?.name ?? 'N/A'}", style: Theme.of(context).textTheme.headline1),
-                    Text('Place: ${widget.court.courtData?.place ?? 'N/A'}', style: Theme.of(context).textTheme.subtitle1),
+                    Text("Name: ${widget.court.courtData?.name ?? 'N/A'}", style: TextStyle(fontSize: 50 ,color: Colors.white60),),
+                    Text('Place: ${widget.court.courtData?.place ?? 'N/A'}', style: Theme.of(context).textTheme.titleMedium),
                     Text(
                       'Established: ${widget.court.courtData?.yearEstablished ?? 'N/A'}',
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Theme.of(context).hintColor),
                     ),
                     Text(
                       'Ticket Price: \$${_ticketPrice.toStringAsFixed(2)}',
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    Text('Running Cost: OMR ${_runningCost.toStringAsFixed(2)}', style: Theme.of(context).textTheme.headline1),
+                    Text('Running Cost: OMR ${_runningCost.toStringAsFixed(2)}', style: Theme.of(context).textTheme.displayLarge),
                   ],
                 ),
               ),

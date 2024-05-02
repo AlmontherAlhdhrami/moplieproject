@@ -22,6 +22,12 @@ Future<void> main() async {
   var list = courtList;
   databaseRef.child('messages').push().set({'message': 'HelloWorld'});
   DatabaseHelper.createFirebaseRealtimeDBWithUniqueIDs('padlecourt', list);
+  DatabaseHelper.createFirebaseRealtimeDBWithUniqueIDs('courtList_izkai', courtList_izkai);
+  DatabaseHelper.createFirebaseRealtimeDBWithUniqueIDs('courtList_muscat', courtList_muscat);
+  DatabaseHelper.createFirebaseRealtimeDBWithUniqueIDs('courtList_Nizwa', courtList_Nizwa);
+  DatabaseHelper.createFirebaseRealtimeDBWithUniqueIDs('courtList_salalh', courtList_salalh);
+
+
   runApp(MyApp());
 }
 

@@ -87,4 +87,87 @@ class DatabaseHelper {
         .then((value) => print("Message written successfully"))
         .catchError((error) => print("Failed to write message: $error"));
   }
+
+
+  static void read(Function(List<Court>) castleListCallback) {
+    DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+    databaseReference.child("courtList_izkai").onValue.listen((castleDataJson) {
+      if (castleDataJson.snapshot.exists) {
+        CourtData castleData;
+        Court castle;
+        List<Court> castleList = [];
+        castleDataJson.snapshot.children.forEach((element) {
+//print("Element Key: ${element.key}");
+//print("Element: ${element.value}");
+          castleData = CourtData.fromJson(element.value as Map);
+          castle = Court(element.key, castleData);
+          castleList.add(castle);
+        });
+        castleListCallback(castleList);
+      } else {
+        print("The data snapshot does not exist!");
+      }
+    });
+  }
+
+  static void readmuscat(Function(List<Court>) castleListCallback) {
+    DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+    databaseReference.child("courtList_muscat").onValue.listen((castleDataJson) {
+      if (castleDataJson.snapshot.exists) {
+        CourtData castleData;
+        Court castle;
+        List<Court> castleList = [];
+        castleDataJson.snapshot.children.forEach((element) {
+//print("Element Key: ${element.key}");
+//print("Element: ${element.value}");
+          castleData = CourtData.fromJson(element.value as Map);
+          castle = Court(element.key, castleData);
+          castleList.add(castle);
+        });
+        castleListCallback(castleList);
+      } else {
+        print("The data snapshot does not exist!");
+      }
+    });
+  }
+  static void readNizwa(Function(List<Court>) castleListCallback) {
+    DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+    databaseReference.child("courtList_Nizwa").onValue.listen((castleDataJson) {
+      if (castleDataJson.snapshot.exists) {
+        CourtData castleData;
+        Court castle;
+        List<Court> castleList = [];
+        castleDataJson.snapshot.children.forEach((element) {
+//print("Element Key: ${element.key}");
+//print("Element: ${element.value}");
+          castleData = CourtData.fromJson(element.value as Map);
+          castle = Court(element.key, castleData);
+          castleList.add(castle);
+        });
+        castleListCallback(castleList);
+      } else {
+        print("The data snapshot does not exist!");
+      }
+    });
+  }
+  static void readSala(Function(List<Court>) castleListCallback) {
+    DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+    databaseReference.child("courtList_salalh").onValue.listen((castleDataJson) {
+      if (castleDataJson.snapshot.exists) {
+        CourtData castleData;
+        Court castle;
+        List<Court> castleList = [];
+        castleDataJson.snapshot.children.forEach((element) {
+//print("Element Key: ${element.key}");
+//print("Element: ${element.value}");
+          castleData = CourtData.fromJson(element.value as Map);
+          castle = Court(element.key, castleData);
+          castleList.add(castle);
+        });
+        castleListCallback(castleList);
+      } else {
+        print("The data snapshot does not exist!");
+      }
+    });
+  }
 }
