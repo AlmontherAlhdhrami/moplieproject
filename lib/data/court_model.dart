@@ -21,7 +21,7 @@ class CourtData {
 
   Map<String, dynamic> toJson() {
     return {
-      "image": imagePath,
+      "imagePath": imagePath,
       "name": name,
       "place": place,
       "established": yearEstablished,
@@ -33,7 +33,7 @@ class CourtData {
   }
 
   CourtData.fromJson(Map<dynamic, dynamic> json) {
-    imagePath = json["image"];
+    imagePath = json["imagePath"];
     name = json["name"];
     place = json["place"];
     yearEstablished = checkInteger(json["established"]);

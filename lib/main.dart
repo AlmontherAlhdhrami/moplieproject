@@ -1,13 +1,13 @@
 // main.dart
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:moplieproject/screens/AddNewCourtDataToFirebase.dart';
-import 'package:moplieproject/screens/MyDynamicImageListScreen.dart';
+
 import 'package:moplieproject/screens/StaticImageListScreen.dart';
 import 'package:moplieproject/screens/home_page.dart';
 import 'package:moplieproject/screens/profile_page.dart';
-import 'package:moplieproject/shareable/DynamicScreen.dart';
+
 import 'data/DatabaseHelper.dart';
 import 'data/MyTextScreen.dart';
 import 'data/list.dart';
@@ -50,11 +50,14 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> _widgetOptions; //list that takes widgets
 
   _MyHomePageState() : _widgetOptions = [
-    //HomePage(), // HomePage requires sendMessage to be passed
-    ProfilePage(),
-    MyDynamicImageListScreen(),
+    //HomePage(),
+    // HomePage requires sendMessage to be passed
+    HomeScreen(),
+
+    MyTextScreen(),
     //AddNewCourtDataToFirebase(),
     StaticImageListScreen(),
+    ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -75,34 +78,26 @@ class _MyHomePageState extends State<MyHomePage> {
         
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.event),
-            label: 'Booking',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'add new court',
-          ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.person),
-          //   label: 'Profile',
-          // ),
-        ],
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.amber,
-        unselectedItemColor: Colors.white,
-        selectedFontSize: 14.0,
-        unselectedFontSize: 12.0,
-        iconSize: 28.0,
+      bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.blue,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        color: Colors.white,
+        buttonBackgroundColor: Colors.amber,
+        height: 50,
+        items: <Widget>[
+          Icon(Icons.home, size: 28, ),
+          Icon(Icons.event, size: 28, ),
+          Icon(Icons.add, size: 28, ),
+          Icon(Icons.list, size: 28, ),
+
+          // Uncomment the following line if you decide to add the profile item back
+          // Icon(Icons.person, size: 28, color: _selectedIndex == 3 ? Colors.amber : Colors.white),
+        ],
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        index: _selectedIndex,
       ),
     );
   }
