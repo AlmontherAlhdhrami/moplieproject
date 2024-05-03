@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../data/court_model.dart';
 import '../data/DatabaseHelper.dart';
 import '../data/registrationpage.dart';
@@ -64,6 +66,28 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton.icon(
+                    icon: Icon(Icons.message),
+                    label: Text("Send SMS"),
+                    onPressed: () => sendSMS("+96871745009", "Your SMS message here."),
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                  ),
+
+                  ElevatedButton.icon(
+                icon: Icon(Icons.email),
+                label: Text("Send Email"),
+                onPressed: () => DatabaseHelper.sendEmail(
+                    "asfz.2000@gmail.com",  // Recipient's email address
+                    "about registretion", // Email subject
+                    "Hello, we are padle app how we can help you?.", // Email body
+                    context
+                ),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
+              ),]
+    ),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.blue[300],
@@ -79,6 +103,7 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
+
                     widget.court.courtData?.imagePath != null
                         ? ImageDecoration(imagePath: widget.court.courtData!.imagePath!)
                         : const SizedBox(height: 200, child: Placeholder()),
@@ -146,7 +171,37 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
       ),
     );
   }
-
+  Future<bool> requestSmsPermission() async {
+    var status = await Permission.sms.status;
+    if (!status.isGranted) {
+      final result = await Permission.sms.request();
+      return result.isGranted;
+    }
+    return true;
+  }
+  void sendSMS(String phoneNumber, String message) async {
+    bool isPermissionGranted = await requestSmsPermission();
+    if (isPermissionGranted) {
+      String smsUri = "sms:$phoneNumber?body=$message";
+      if (await canLaunch(smsUri)) {
+        await launch(smsUri);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Failed to open SMS app."),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("SMS permission denied."),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
   void updateCastle() {
     Navigator.push(
       context,
