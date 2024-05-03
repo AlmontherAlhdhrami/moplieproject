@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../data/court_model.dart';
 import '../data/DatabaseHelper.dart';
+import '../data/registrationpage.dart';
 import 'CastleCreationUpdateScreen.dart';
 import 'ImageDecoration.dart';
 import 'appStyle.dart'; // Make sure appStyle.dart is updated with new styles as needed
@@ -11,9 +12,9 @@ class AppTheme {
     return ThemeData(
       primarySwatch: Colors.blueGrey,
       hintColor: Colors.amber,
-      scaffoldBackgroundColor: Colors.grey[900],
+      scaffoldBackgroundColor: Colors.white,
       appBarTheme: AppBarTheme(
-        backgroundColor: Colors.blueGrey[800],
+        backgroundColor: Colors.blue[300],
         elevation: 0,
       ),
       textTheme: TextTheme(
@@ -110,6 +111,7 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
                 children: [
                   ElevatedButton.icon(
                     icon: Icon(Icons.update),
@@ -124,11 +126,18 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
                     style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   ),
                   ElevatedButton.icon(
-                    icon: Icon(Icons.arrow_back),
-                    label: Text("Back"),
-                    onPressed: () => Navigator.pop(context),
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey[300]),
+                    icon: Icon(Icons.assignment),
+                    label: Text("Register"),
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RegistrationPage(court: widget.court),
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                   ),
+
+
                 ],
               ),
             ],

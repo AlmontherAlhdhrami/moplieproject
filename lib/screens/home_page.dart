@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Colors.blueGrey[900]!, Colors.blueGrey[300]!],
+            colors: [Colors.blue[300]!, Colors.blue[800]!],
           ),
         ),
         child: SafeArea(
@@ -38,18 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 30),
-                CircleAvatar(
-                  radius: 60,
-                  backgroundImage: AssetImage("images/c.jpg"),
-                ),
-                SizedBox(height: 20),
+
+
+                SizedBox(height: 10),
                 Text(
                   "Start booking your time to play now",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white70),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 20),
                 Material(
                   borderRadius: BorderRadius.circular(30),
                   elevation: 8,
