@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../data/Izkiscreen.dart';
 import '../data/NzwaScreen.dart';
@@ -13,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Colors.blue[300]!, Colors.blue[800]!],
+            colors: [Colors.white70, Colors.blue],
           ),
         ),
         child: SafeArea(
@@ -30,21 +30,34 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  "Welcome",
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+
+                  children: <Widget>[
+                    Image.asset(
+                      "image/logo2.png",
+                      width: 200,  // Specify the width
+                      height: 200, // Specify the height
+                      fit: BoxFit.cover, // Covers the box by clipping the image
+                    ),
+
+                     // Space between the image and the text
+                    Text(
+                      "Welcome",
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                        color:  Color(0xFF596B21),
+                      ),
+                    ),
+                  ],
                 ),
-
-
                 SizedBox(height: 10),
                 Text(
                   "Start booking your time to play now",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white70),
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color:  Color(
+                      0xFF1A730C)),
                 ),
                 SizedBox(height: 20),
                 Material(
@@ -111,6 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
 
 class placecard extends StatelessWidget {
   final String title, image;

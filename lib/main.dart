@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:moplieproject/screens/AddNewCourtDataToFirebase.dart';
 
 import 'package:moplieproject/screens/StaticImageListScreen.dart';
 import 'package:moplieproject/screens/home_page.dart';
@@ -54,6 +55,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   int _selectedIndex = 0; //this is the index of the pages through navbar
 
   final List<Widget> _widgetOptions; //list that takes widgets
@@ -65,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     MyTextScreen(),
 
-    ProfilePage(),
+    AddNewCourtDataToFirebase(),
 
     ContactUsPage(),
 
@@ -92,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.blue,
         color: Colors.white,
-        buttonBackgroundColor: Colors.amber,
+        buttonBackgroundColor: Color(0xFFD2F73E),
         height: 50,
         items: <Widget>[
           Icon(Icons.home, size: 28, ),
