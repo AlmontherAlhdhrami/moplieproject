@@ -99,8 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
         items: <Widget>[
           Icon(Icons.home, size: 28, ),
           Icon(Icons.event, size: 28, ),
+          Icon(Icons.add, size: 28, ),
           Icon(Icons.contact_page, size: 28, ),
-          Icon(Icons.list, size: 28, ),
 
           // Uncomment the following line if you decide to add the profile item back
           // Icon(Icons.person, size: 28, color: _selectedIndex == 3 ? Colors.amber : Colors.white),
