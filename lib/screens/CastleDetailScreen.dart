@@ -133,7 +133,7 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
                   });
                 },
               ),
-              
+              _buildRatingBar(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -168,7 +168,23 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
       ),
     );
   }
-
+  Widget _buildRatingBar() {
+    return RatingBar.builder(
+      initialRating: widget.court.courtData?.starRating ?? 0,
+      minRating: 1,
+      direction: Axis.horizontal,
+      allowHalfRating: true,
+      itemCount: 5,
+      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+      itemBuilder: (context, _) => const Icon(Icons.star, color: Colors.amber),
+      onRatingUpdate: (rating) {
+        setState(() {
+          widget.court.courtData?.starRating = rating;
+          DatabaseHelper.update(widget.court.key!, widget.court.courtData!, context);
+        });
+      },
+    );
+  }
   void sendSMS(String phoneNumber, String message) async {
     final Uri url = Uri(
         scheme: 'sms',
