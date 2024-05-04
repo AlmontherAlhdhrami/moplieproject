@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../screens/CastleDetailScreen.dart';
 import '../screens/ImageDecoration.dart';
+import '../screens/MapScreen.dart';
 import 'DatabaseHelper.dart';
 import 'court_model.dart';
 
@@ -18,9 +19,9 @@ class _SalalahscreenState extends State<Salalahscreen> {
   @override
   void initState() {
     super.initState();
-    DatabaseHelper.readSala((List<Court> castleList) {
+    DatabaseHelper.readFirebaseRealtimeDBMain((List<Court> list) {
       setState(() {
-        this.castleList = castleList;
+        castleList = list;
       });
     });
   }
@@ -29,7 +30,7 @@ class _SalalahscreenState extends State<Salalahscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Salalah Field List'),
+        title: Text('Salalah List'),
         backgroundColor: Colors.deepPurple,
       ),
       body: castleList.isEmpty
@@ -92,6 +93,15 @@ class _SalalahscreenState extends State<Salalahscreen> {
                             fontSize: 16,
                             color: Colors.green[800],
                           ),
+                        ),
+                        IconButton(
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MapScreen(court: court),
+                            ),
+                          ),
+                          icon: Icon(Icons.map, color: Colors.deepPurple),
                         ),
                       ],
                     ),
