@@ -67,27 +67,27 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton.icon(
-                    icon: Icon(Icons.message),
-                    label: Text("Send SMS"),
-                    onPressed: () => sendSMS("+96871745009", "Your SMS message here."),
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                  ),
-
-                  ElevatedButton.icon(
-                icon: Icon(Icons.email),
-                label: Text("Send Email"),
-                onPressed: () => DatabaseHelper.sendEmail(
-                    "asfz.2000@gmail.com",  // Recipient's email address
-                    "about registretion", // Email subject
-                    "Hello, we are padle app how we can help you?.", // Email body
-                    context
-                ),
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
-              ),]
-    ),
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton.icon(
+                      icon: Icon(Icons.message),
+                      label: Text("Send SMS"),
+                      onPressed: () => sendSMS("+96871745009", "Your SMS message here."),
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                    ),
+                    ElevatedButton.icon(
+                      icon: Icon(Icons.email),
+                      label: Text("Send Email"),
+                      onPressed: () => DatabaseHelper.sendEmail(
+                          "asfz.2000@gmail.com",  // Recipient's email address
+                          "about registration", // Email subject
+                          "Hello, we are padle app how can we help you?", // Email body
+                          context
+                      ),
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
+                    ),
+                  ]
+              ),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.blue[300],
@@ -103,21 +103,20 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-
                     widget.court.courtData?.imagePath != null
                         ? ImageDecoration(imagePath: widget.court.courtData!.imagePath!)
                         : const SizedBox(height: 200, child: Placeholder()),
-                    Text("Name: ${widget.court.courtData?.name ?? 'N/A'}", style: TextStyle(fontSize: 50 ,color: Colors.white60),),
-                    Text('Place: ${widget.court.courtData?.place ?? 'N/A'}', style: Theme.of(context).textTheme.titleMedium),
+                    Text("Name: ${widget.court.courtData?.name ?? 'N/A'}", style: TextStyle(fontSize: 50, color: Colors.white60)),
+                    Text('Place: ${widget.court.courtData?.place ?? 'N/A'}', style: Theme.of(context).textTheme.subtitle1),
                     Text(
                       'Established: ${widget.court.courtData?.yearEstablished ?? 'N/A'}',
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Theme.of(context).hintColor),
                     ),
                     Text(
                       'Ticket Price: \$${_ticketPrice.toStringAsFixed(2)}',
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.subtitle1,
                     ),
-                    Text('Running Cost: OMR ${_runningCost.toStringAsFixed(2)}', style: Theme.of(context).textTheme.displayLarge),
+                    Text('Running Cost: OMR ${_runningCost.toStringAsFixed(2)}', style: Theme.of(context).textTheme.headline1),
                   ],
                 ),
               ),
@@ -134,9 +133,9 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
                   });
                 },
               ),
+              
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
                 children: [
                   ElevatedButton.icon(
                     icon: Icon(Icons.update),
@@ -161,8 +160,6 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
                     ),
                     style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                   ),
-
-
                 ],
               ),
             ],
@@ -171,37 +168,27 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
       ),
     );
   }
-  Future<bool> requestSmsPermission() async {
-    var status = await Permission.sms.status;
-    if (!status.isGranted) {
-      final result = await Permission.sms.request();
-      return result.isGranted;
-    }
-    return true;
-  }
+
   void sendSMS(String phoneNumber, String message) async {
-    bool isPermissionGranted = await requestSmsPermission();
-    if (isPermissionGranted) {
-      String smsUri = "sms:$phoneNumber?body=$message";
-      if (await canLaunch(smsUri)) {
-        await launch(smsUri);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Failed to open SMS app."),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+    final Uri url = Uri(
+        scheme: 'sms',
+        path: phoneNumber,
+        queryParameters: {
+          'body': message
+        }
+    );
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("SMS permission denied."),
+          content: Text("Failed to open SMS app."),
           backgroundColor: Colors.red,
         ),
       );
     }
   }
+
   void updateCastle() {
     Navigator.push(
       context,
