@@ -34,7 +34,6 @@ class _CastleCreationUpdateScreenState
       _nameController.text = widget.court!.courtData?.name ?? '';
       _placeController.text = widget.court!.courtData?.place ?? '';
       _establishedController.text =
-          widget.court!.courtData?.yearEstablished.toString() ?? '';
       _imageController.text = widget.court!.courtData?.imagePath ?? '';
       _ticketPriceController.text =
           widget.court!.courtData?.ticketPrice.toString() ?? '';
@@ -187,7 +186,7 @@ class _CastleCreationUpdateScreenState
         _imageController.text,
         _nameController.text,
         _placeController.text,
-        int.tryParse(_establishedController.text),
+
         double.tryParse(_ticketPriceController.text),
         double.tryParse(_latitudeController.text),
         double.tryParse(_longitudeController.text),

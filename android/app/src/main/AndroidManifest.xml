@@ -7,6 +7,8 @@
         android:label="moplieproject"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCd8QdTHbVTFnsKuuqkHuDHfO_U-QvlD2I"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

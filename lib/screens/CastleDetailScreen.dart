@@ -108,10 +108,7 @@ class _CastleDetailScreenState extends State<CastleDetailScreen> {
                         : const SizedBox(height: 200, child: Placeholder()),
                     Text("Name: ${widget.court.courtData?.name ?? 'N/A'}", style: TextStyle(fontSize: 50, color: Colors.white60)),
                     Text('Place: ${widget.court.courtData?.place ?? 'N/A'}', style: Theme.of(context).textTheme.subtitle1),
-                    Text(
-                      'Established: ${widget.court.courtData?.yearEstablished ?? 'N/A'}',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Theme.of(context).hintColor),
-                    ),
+
                     Text(
                       'Ticket Price: \$${_ticketPrice.toStringAsFixed(2)}',
                       style: Theme.of(context).textTheme.subtitle1,

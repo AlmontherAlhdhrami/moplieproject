@@ -9,14 +9,13 @@ class CourtData {
   String? imagePath;
   String? name;
   String? place;
-  int? yearEstablished;
   double? ticketPrice;
   double? latitude;
   double? longitude;
   double? starRating;
 
 
-  CourtData(this.imagePath, this.name, this.place, this.yearEstablished,
+  CourtData(this.imagePath, this.name, this.place,
       this.ticketPrice, this.latitude, this.longitude, this.starRating);
 
   Map<String, dynamic> toJson() {
@@ -24,7 +23,7 @@ class CourtData {
       "imagePath": imagePath,
       "name": name,
       "place": place,
-      "established": yearEstablished,
+
       "ticket_price": ticketPrice,
       'latitude': latitude,
       'longitude': longitude,
@@ -36,7 +35,6 @@ class CourtData {
     imagePath = json["imagePath"];
     name = json["name"];
     place = json["place"];
-    yearEstablished = checkInteger(json["established"]);
     ticketPrice = checkDouble(json["ticket_price"]);
     latitude = checkDouble(json['latitude']);
     longitude = checkDouble(json['longitude']);

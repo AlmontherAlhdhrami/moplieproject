@@ -1,15 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../screens/ImageDecoration.dart';
 import 'DatabaseHelper.dart';
 import 'court_model.dart';
-import '../../screens/CastleDetailScreen.dart'; // Ensure you have the correct import for CastleDetailScreen
+import '../../screens/CastleDetailScreen.dart';
+import '../../screens/MapScreen.dart'; // Ensure the path is correct
 
 class MyTextScreen extends StatefulWidget {
-  const MyTextScreen({Key? key});
+  const MyTextScreen({Key? key}) : super(key: key);
 
   @override
-  State<MyTextScreen> createState() => _MyTextScreenState();
+  _MyTextScreenState createState() => _MyTextScreenState();
 }
 
 class _MyTextScreenState extends State<MyTextScreen> {
@@ -18,9 +18,9 @@ class _MyTextScreenState extends State<MyTextScreen> {
   @override
   void initState() {
     super.initState();
-    DatabaseHelper.readFirebaseRealtimeDBMain((List<Court> castleList) {
+    DatabaseHelper.readFirebaseRealtimeDBMain((List<Court> list) {
       setState(() {
-        this.castleList = castleList;
+        castleList = list;
       });
     });
   }
@@ -92,6 +92,15 @@ class _MyTextScreenState extends State<MyTextScreen> {
                             fontSize: 16,
                             color: Colors.green[800],
                           ),
+                        ),
+                        IconButton(
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MapScreen(court: court),
+                            ),
+                          ),
+                          icon: Icon(Icons.map, color: Colors.deepPurple),
                         ),
                       ],
                     ),
