@@ -64,9 +64,11 @@ class _MyHomePageState extends State<MyHomePage> {
     HomeScreen(),
 
     MyTextScreen(),
-    //AddNewCourtDataToFirebase(),
-    ContactUsPage(),
+
     ProfilePage(),
+
+    ContactUsPage(),
+
   ];
 
   void _onItemTapped(int index) {
