@@ -10,6 +10,8 @@ import 'package:moplieproject/screens/profile_page.dart';
 
 import 'data/DatabaseHelper.dart';
 import 'data/MyTextScreen.dart';
+import 'data/NotificationHelper.dart';
+import 'data/contactus.dart';
 import 'data/list.dart';
 
 
@@ -17,6 +19,7 @@ import 'data/list.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  NotificationHelper.initialize();
 
   final databaseRef = FirebaseDatabase.instance.reference();
   var list = courtList;
@@ -62,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     MyTextScreen(),
     //AddNewCourtDataToFirebase(),
-    StaticImageListScreen(),
+    ContactUsPage(),
     ProfilePage(),
   ];
 
@@ -92,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
         items: <Widget>[
           Icon(Icons.home, size: 28, ),
           Icon(Icons.event, size: 28, ),
-          Icon(Icons.add, size: 28, ),
+          Icon(Icons.contact_page, size: 28, ),
           Icon(Icons.list, size: 28, ),
 
           // Uncomment the following line if you decide to add the profile item back
