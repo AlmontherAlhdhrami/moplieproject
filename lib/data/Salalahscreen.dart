@@ -101,7 +101,7 @@ class _SalalahscreenState extends State<Salalahscreen> {
                               builder: (context) => MapScreen(court: court),
                             ),
                           ),
-                          icon: Icon(Icons.map, color: Colors.deepPurple),
+                          icon: Icon(Icons.place, color: Colors.redAccent),
                         ),
                       ],
                     ),
