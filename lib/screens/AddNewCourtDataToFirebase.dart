@@ -62,9 +62,10 @@ class AddNewCourtDataToFirebase extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10),
+
                   TextField(
                     controller: ticketPrice,
-                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: "Ticket Price",
                       prefixIcon: Icon(Icons.money, color: Colors.amber[800]),
